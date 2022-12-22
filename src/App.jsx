@@ -1,15 +1,16 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "./App.css";
+import Categorey from "./components/categorey/Categorey";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
 import Products from "./pages/products/Products";
-import SingleProducts from "./pages/singleProduct/SingleProducts";
+import SingleProduct from "./pages/singleProduct/SingleProduct";
+import AppContext from "./utils/contextApi";
 
 // Layout making
-
 const Layout = () => {
   return (
     <>
@@ -30,12 +31,16 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/products/:id",
+        path: "/products",
         element: <Products />,
       },
       {
+        path: "/categorey/:id",
+        element: <Categorey />,
+      },
+      {
         path: "/product/:id",
-        element: <SingleProducts />,
+        element: <SingleProduct />,
       },
       {
         path: "/about",
@@ -52,7 +57,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <AppContext >
+        <RouterProvider router={router} />
+      </AppContext>
     </>
   );
 }
