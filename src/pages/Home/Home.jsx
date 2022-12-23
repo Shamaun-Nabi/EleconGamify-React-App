@@ -7,8 +7,10 @@ import { ContextApi } from "../../utils/contextApi";
 
 export default function Home({ value }) {
   const { categorey, setCategorey } = useContext(ContextApi);
+  const { products, setProducts } = useContext(ContextApi);
   useEffect(() => {
     getCategories();
+    getProducts();
   }, []);
 
   const getCategories = () => {
@@ -17,11 +19,17 @@ export default function Home({ value }) {
       setCategorey(res);
     });
   };
+  const getProducts = () => {
+    dataFetching("/api/products?populate=*").then((res) => {
+      // console.log(res);
+      setProducts(res);
+    });
+  };
   return (
     <div>
       <Slider />
       <FeatureProducts categorey={categorey} />
-      <Products title="Popular Products" />
+      <Products products={products} title="Popular Products" />
     </div>
   );
 }

@@ -9,56 +9,20 @@ import Home from "./pages/Home/Home";
 import Products from "./pages/products/Products";
 import SingleProduct from "./pages/singleProduct/SingleProduct";
 import AppContext from "./utils/contextApi";
-
-// Layout making
-const Layout = () => {
-  return (
-    <>
-      <Navbar />
-      <Outlet />
-      <Footer />
-    </>
-  );
-};
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/products",
-        element: <Products />,
-      },
-      {
-        path: "/categorey/:id",
-        element: <Categorey />,
-      },
-      {
-        path: "/product/:id",
-        element: <SingleProduct />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-    ],
-  },
-]);
-
+import { Routes, Route } from "react-router-dom";
+import FeatureProducts from "./components/FeatureProduct/FeatureProducts";
 function App() {
   return (
     <>
-      <AppContext >
-        <RouterProvider router={router} />
+      <AppContext>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/categorey/:id" element={<FeatureProducts />} />
+          <Route path="/product/:id" element={<SingleProduct />} />
+        </Routes>
+        <Footer />
       </AppContext>
     </>
   );
