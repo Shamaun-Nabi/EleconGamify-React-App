@@ -1,23 +1,26 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import FeatureProducts from "../../components/FeatureProduct/FeatureProducts";
 import Slider from "../../components/Slider/Slider";
 import Products from "../products/Products";
 import { dataFetching } from "../../utils/api.js";
+import { ContextApi } from "../../utils/contextApi";
 
 export default function Home({ value }) {
+  const { categorey, setCategorey } = useContext(ContextApi);
   useEffect(() => {
     getCategories();
   }, []);
 
   const getCategories = () => {
     dataFetching("/api/categoreys?populate=*").then((res) => {
-      console.log(res);
+      // console.log(res);
+      setCategorey(res);
     });
   };
   return (
     <div>
       <Slider />
-      <FeatureProducts />
+      <FeatureProducts categorey={categorey} />
       <Products title="Popular Products" />
     </div>
   );
